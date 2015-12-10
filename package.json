@@ -1,0 +1,19 @@
+{
+  "name": "basic-twitter-client",
+  "version": "0.0.1",
+  "description": "basic twitter Rest API wrapper",
+  "main": "twitter.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "twitter",
+    "api"
+  ],
+  "author": "Greg Laubenstein",
+  "license": "ISC",
+  "dependencies": {
+    "q": "^1.4.1",
+    "restify": "^4.0.3"
+  }
+}
