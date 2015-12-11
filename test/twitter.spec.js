@@ -18,7 +18,6 @@ describe("Twitter Client", function () {
 			});
 			assert.typeOf(twitter.tweetsByUser, 'function');
 			assert.typeOf(twitter.tweetsByHashtag, 'function');
-			assert.typeOf(twitter.client, 'Object');
 		});
 	});
 });
