@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "description": "basic twitter Rest API wrapper",
   "main": "twitter.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [
     "twitter",
     "api"
@@ -15,5 +12,12 @@
   "dependencies": {
     "q": "^1.4.1",
     "restify": "^4.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.4.1",
+    "gulp": "^3.9.0",
+    "gulp-env": "^0.2.0",
+    "gulp-mocha": "^2.2.0",
+    "mocha": "^2.3.4"
   }
 }
