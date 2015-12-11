@@ -4,6 +4,10 @@ node_js:
   - "4.0"
   - "0.12"
   - "0.11"
+before_script:
+  - npm install -g gulp
+script: gulp test
+
 deploy:
   provider: npm
   email: gjlaubenstein@gmail.com
@@ -12,9 +16,6 @@ deploy:
   on:
     tags: true
     repo: gjlaubenstein/basic-twitter-client
-  before_script:
-  - npm install -g gulp
-  script: gulp test
 env:
   global:
     secure: CcY2sRWyiM6bmtKKhEmg++jhefi0aXaR0wqhoLud64E01fLrUHB0Ztvg4TML2y6fbPff3Rvoq86/sBkYITxaMtJSq5dStXtGcXU/Hc3KuX2JpmvEb/CZkrYe83UHGHU0J5C/NhKYX3h4PxJU14rdJ95xzhaROPjUdHv2rG5SZNX/vWvtqkOpgMD+/e+ARdTcj+t3NpHEEtFratkjoVHaPifZOcCKtXsK9u0f8s/pl5Gbji1sDRsRIjAJ32/Ga/f/cUkTsnOO4I17+aJeBxA8lbJzt3qyAILdKnPh8JIBXm/hPDSiMUsaL7o2vYFFo9z52fJnD/leZyuX0twWu270zKdtYgerzIn2isEb7YAFGBH/rimTrb5cgx9FdhjKWu2hke+zmJDrnlRBb1/jnw8TXsJ02ol7dMB5A1s5ZBHWlfOVLIgwdhfIQ3tO/J9ChLQvfKCu6KlINcP9c8vZi4OUfnhTiDgOwjij3JioDsl5S0PLK3kYQGPiEH2LkteqZCM2NeROpcmqsRIuljAXJlsV6GDJbxbOCkO6s+OSsQLWJZ0wkHPf8l5y1qMpC1Y0vhvDzwSpRytRAAWvYgA1E1m7wkPxMYgFy0fFSZBSK5k7FoTUy4NM/0kwNiLJ4FMp8eFkDZzguJ4zRBdoWhcr1QWxxc7dqFXEJMZyBpzrrps9I0E=
