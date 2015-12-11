@@ -1,5 +1,6 @@
 # basic-twitter-client
 [![Build Status](https://travis-ci.org/gjlaubenstein/basic-twitter-client.svg?branch=master)](https://travis-ci.org/gjlaubenstein/basic-twitter-client)
+[![Coverage Status](https://coveralls.io/repos/gjlaubenstein/basic-twitter-client/badge.svg?branch=master&service=github)](https://coveralls.io/github/gjlaubenstein/basic-twitter-client?branch=master)
 ## install
 `npm install basic-twitter-client --save`
 
