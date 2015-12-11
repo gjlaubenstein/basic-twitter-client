@@ -1,5 +1,5 @@
 # basic-twitter-client
-
+[![Build Status](https://travis-ci.org/gjlaubenstein/basic-twitter-client.svg?branch=master)](https://travis-ci.org/gjlaubenstein/basic-twitter-client)
 ## install
 `npm install basic-twitter-client --save`
 
