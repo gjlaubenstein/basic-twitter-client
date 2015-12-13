@@ -1,11 +1,10 @@
 language: node_js
 node_js:
-  - "4.1"
+- '4.1'
 before_script:
-  - npm install -g gulp
+- npm install -g gulp
 script: gulp test
-after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-
+after_script: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
 deploy:
   provider: npm
   email: gjlaubenstein@gmail.com
@@ -16,4 +15,4 @@ deploy:
     repo: gjlaubenstein/basic-twitter-client
 env:
   global:
-    secure: CcY2sRWyiM6bmtKKhEmg++jhefi0aXaR0wqhoLud64E01fLrUHB0Ztvg4TML2y6fbPff3Rvoq86/sBkYITxaMtJSq5dStXtGcXU/Hc3KuX2JpmvEb/CZkrYe83UHGHU0J5C/NhKYX3h4PxJU14rdJ95xzhaROPjUdHv2rG5SZNX/vWvtqkOpgMD+/e+ARdTcj+t3NpHEEtFratkjoVHaPifZOcCKtXsK9u0f8s/pl5Gbji1sDRsRIjAJ32/Ga/f/cUkTsnOO4I17+aJeBxA8lbJzt3qyAILdKnPh8JIBXm/hPDSiMUsaL7o2vYFFo9z52fJnD/leZyuX0twWu270zKdtYgerzIn2isEb7YAFGBH/rimTrb5cgx9FdhjKWu2hke+zmJDrnlRBb1/jnw8TXsJ02ol7dMB5A1s5ZBHWlfOVLIgwdhfIQ3tO/J9ChLQvfKCu6KlINcP9c8vZi4OUfnhTiDgOwjij3JioDsl5S0PLK3kYQGPiEH2LkteqZCM2NeROpcmqsRIuljAXJlsV6GDJbxbOCkO6s+OSsQLWJZ0wkHPf8l5y1qMpC1Y0vhvDzwSpRytRAAWvYgA1E1m7wkPxMYgFy0fFSZBSK5k7FoTUy4NM/0kwNiLJ4FMp8eFkDZzguJ4zRBdoWhcr1QWxxc7dqFXEJMZyBpzrrps9I0E=
+    secure: aNaZ1zg384uzxAtM4/UVjtrvF4ks3DfFpbEVsS7b9tnExg0HuGztoSuLMVT0jjCVFTEVhh/C1YpzUfm9ZEMSGz6j1CYBngrhw5VtC5VRtIRifNX4dFl81yK85rHR/BDDCihu45PTLetwte2bLbmMIaCHuTOVlgnBx77j99MH783l75w1uDJsgc5sP1mruYpq6XuHQ+OdlNWgQiYs1UuErFbZxB1liz5V6OQvp0PTsdDr+2q5Qb7tm1iydDsuqkTEXlTZKJbGCPeTC8lSnopUok6vY6aCQU+DTFGuGnKbsocM/HrCJemr6IGef/Orbvn7q4JNf15om9Pu2uREG5xEpJufFPvWWaoE7/cTN4VphlPGJTEp5IG/omYtfjaHek7Ni2ZwYa7JHOYe77ODid+TvYf47OMJoi7TvgR4X7nD4g0Gn2h0ajsQkeiywDu9gwlmjL3ixJEp2S6LcPlyEctPUNaJk6hiH7FdzUkOO96bMkGjBIYI99OVlrRPIHyvbf7Ns8PZDJvp2//R6pGOEGLFqom2ff6ZEO91YQQlkfhsbJbauQikLamN/cy+hSpMqeG8binzxdPKDSq1yqlmUmulpTnHMgllqpoozkrTICkuOL4hV4bEqjtUA+TtCN8phzEa8qwf4ZsX0PUdCZkBRGT3xAEytv+G0XeUQzXFiu0BFxo=
