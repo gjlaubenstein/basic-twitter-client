@@ -29,7 +29,7 @@ node_modules
 # Visaul Stuido Code
 typings
 .vscode
-
+jsconfig.json
 # Code Coverage
 coverage
 

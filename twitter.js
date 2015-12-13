@@ -1,64 +1,91 @@
+'use strict';
+
 var restify = require('restify');
 var util = require('util');
 var Q = require('q');
 
-var Twitter = function (credentials) {
-	var self = this;
-	getTwitterClient(credentials.consumer_key, credentials.consumer_secret).then(function (client) {
-		self.client = client;
-	});
-};
+class Twitter {
+	constructor(credentials) {
+		this.secret = credentials.consumer_secret;
+		this.key = credentials.consumer_key;
+		this.tokenCredentials;
+		this.token;
+		this.client;
+	}
 
-Twitter.prototype.tweetsByUser = function (user, count) {
-	var deferred = Q.defer();
-	this.client.get(util.format('/1.1/statuses/user_timeline.json?screen_name=%s&count=%s', user, count), function (err, req, res, data) {
-		deferred.resolve(JSON.parse(res.body));
-	});
-	return deferred.promise;
-}
+	tweetsByUser(user, count) {
+		var deferred = Q.defer();
+		
+		this.checkTokenSet().catch(() => {
+			return this.getBearerToken().then(() => {
+				this.client = this.buildClient();
+			});
+		}).finally(() => {
+			return this.client.get(util.format('/1.1/statuses/user_timeline.json?screen_name=%s&count=%s', user, count), function (err, req, res, data) {
+				deferred.resolve(JSON.parse(res.body));
+			});
+		});
 
-Twitter.prototype.tweetsByHashtag = function (hashtag, count) {
-	var deferred = Q.defer();
-	this.client.get(util.format('/1.1/search/tweets.json?q=%s&count=%s', hashtag, count), function (err, req, res, data) {
-		deferred.resolve(JSON.parse(res.body));
-	});
-	return deferred.promise;
-}
+		return deferred.promise;
+	}
 
-function getTwitterClient(key, secret) {
-	var deferred = Q.defer();
-	var tokenCredentials = createTwitterCredentialsToken(key, secret);
+	tweetsByHashtag(hashtag, count) {
+		var deferred = Q.defer();
+		this.checkTokenSet().catch(() => {
+			return this.getBearerToken().then(() => {
+				this.client = this.buildClient();
+			});
+		}).finally(() => {
+			return this.client.get(util.format('/1.1/search/tweets.json?q=%s&count=%s', hashtag, count), function (err, req, res, data) {
+				deferred.resolve(JSON.parse(res.body));
+			});
+		});
+		return deferred.promise;
+	}
 
-	var twitterAuthClient = restify.createStringClient({
-		url: 'https://api.twitter.com',
-		headers: {
-			'Authorization': 'Basic ' + tokenCredentials
+	buildClientToken() {
+		var tokenBuffer = new Buffer(this.key + ':' + this.secret);
+		this.tokenCredentials = tokenBuffer.toString("base64");
+	}
+
+	getBearerToken() {
+		var deferred = Q.defer();
+		this.buildClientToken();
+		var twitterAuthClient = restify.createStringClient({
+			url: 'https://api.twitter.com',
+			headers: {
+				'Authorization': 'Basic ' + this.tokenCredentials
+			}
+		});
+
+		twitterAuthClient.post('/oauth2/token?grant_type=client_credentials', (err, req, res, data) => {
+			var body = JSON.parse(res.body);
+			this.token = body.access_token;
+			deferred.resolve();
+		});
+		return deferred.promise;
+	}
+
+	buildClient(token) {
+		var client = restify.createStringClient({
+			url: 'https://api.twitter.com',
+			headers: {
+				'Authorization': 'bearer ' + this.token
+			}
+		});
+		return client;
+	}
+
+	checkTokenSet() {
+		var deferred = Q.defer();
+		if (typeof (this.token) === 'undefined') {
+			deferred.reject(false);
 		}
-	});
-
-	var twitterClient;
-	twitterAuthClient.post('/oauth2/token?grant_type=client_credentials', function (err, req, res, data) {
-		if (err) { console.error(err); }
-
-		var body = JSON.parse(res.body);
-		twitterClient = twitterClientFactory(body.access_token);
-		deferred.resolve(twitterClient);
-	});
-	return deferred.promise;
-}
-
-function twitterClientFactory(token) {
-	return restify.createStringClient({
-		url: 'https://api.twitter.com',
-		headers: {
-			'Authorization': 'bearer ' + token
+		else {
+			deferred.resolve(true);
 		}
-	});
-}
-
-function createTwitterCredentialsToken(key, secret) {
-	var token = new Buffer(key + ':' + secret);
-	return token.toString("base64");
+		return deferred.promise;
+	}
 }
 
 module.exports = Twitter;
